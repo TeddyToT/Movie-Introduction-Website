@@ -1,35 +1,34 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { useState } from "react";
+
+import "./App.css";
+import PreviewModel from "./components/Modal/PreviewModel";
+import ShadowButton from "./components/Button/ShadowButton";
+import WhiteButton from "./components/Button/WhiteButton";
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [count, setCount] = useState(0);
 
   return (
     <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+      <div className="grid xl:grid-cols-5 md:grid-cols-4 grid-cols-2 gap-5 w-11/12 mx-auto my-10">
+        <PreviewModel />
+        <PreviewModel />
+        <PreviewModel />
+        <PreviewModel />
+        <PreviewModel />
+        <PreviewModel />
+        <PreviewModel />
+        <PreviewModel />
       </div>
-      <h1 className='text-blue-800'>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
+      <div className="w-1/2 bg-black">
+      <div className="w-2/3 ml-15 py-6 flex flex-row gap-2">
+        <ShadowButton/>
+        <WhiteButton/>
       </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+      </div>
+
     </>
-  )
+  );
 }
 
-export default App
+export default App;
