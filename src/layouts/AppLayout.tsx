@@ -1,19 +1,21 @@
-import { Outlet } from "react-router";
+import { Outlet, useLocation  } from "react-router";
 import AppHeader from "./AppHeader";
 import AppFooter from "./AppFooter";
 
 const LayoutContent: React.FC = () => {
+    const location = useLocation();
+  const isBannerPage = location.pathname === "/";
   return (
-    <div className="min-h-screen bg-black flex flex-col">
-      <div className="order-3 md:order-1 mt-5">
+    <div className="min-h-screen  bg-black flex flex-col">
+      <div className="order-3 md:order-1">
         <AppHeader />
       </div>
 
-      <div className="p-4 mx-auto w-11/12 h-full flex-1 order-1 md:order-2 md:mt-5">
+      <div className={`h-full flex-1 order-1 md:order-2 ${isBannerPage ? " w-full mx-0" : "p-4 w-11/12 mx-auto"}`}>
         <Outlet />
       </div>
 
-      <div className="order-2 md:order-3">
+      <div className="order-2 md:order-3 mt-auto">
         <AppFooter />
       </div>
     </div>

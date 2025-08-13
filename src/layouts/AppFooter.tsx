@@ -3,7 +3,7 @@ import poster from "../assets/movies-poster.jpg";
 const AppFooter: React.FC = () => {
   return (
     <footer
-      className="z-0 relative bottom-0 flex flex-col text-neutral-content w-full  bg-cover bg-center py-12 px-4"
+      className="z-0 relative bottom-0 flex flex-col w-full  bg-cover bg-center py-12 px-4"
       style={{ backgroundImage: `url(${poster})` }}
     >
         <div className="z-1 absolute inset-0 bg-black/70"></div>

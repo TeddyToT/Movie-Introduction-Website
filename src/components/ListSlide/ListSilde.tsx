@@ -4,64 +4,46 @@ import "swiper/css/free-mode";
 import "swiper/css/pagination";
 import { FreeMode, Pagination, Navigation, Autoplay } from "swiper/modules";
 import PreviewModel from "../Modal/PreviewModel";
-import Movies from "./movies";
 import WhiteButton from "../Button/WhiteButton";
-export default function ListSilde({ title }) {
+
+import type { Movie } from "../../types/movie";
+import type { TvSeries } from "../../types/tvSeries";
+
+interface ListSildeProps{
+  data: (Movie | TvSeries)[],
+  title: string
+
+}
+export default function ListSilde({ data, title }:ListSildeProps) {
   return (
     <div className="w-full">
       <div className="flex items-center justify-between">
-        <p className="font-semibold mb-4 display:inline-block capitalize text-white">
+        <p className="text-2xl font-semibold mb-4 display:inline-block capitalize text-white">
           {title}
         </p>
         <div className="w-1/4 md:w-1/6 lg:w-[14%] xl:w-[10%]">
         <WhiteButton text={"View more"} />
         </div>
       </div>
-
-      <Swiper
+        <Swiper
         spaceBetween={20}
-        freeMode={true}
         loop={true}
         autoplay={{
-          delay: 3000, // 3 giây auto
-          disableOnInteraction: false, // vẫn chạy khi user tương tác
+          delay: 3000,
+          disableOnInteraction: false,
         }}
         modules={[Navigation, Pagination, FreeMode, Autoplay]}
-        navigation={true}
         breakpoints={{
           320: { slidesPerView: 2 },
           768: { slidesPerView: 4 },
           1024: { slidesPerView: 6 },
         }}
       >
-        {Movies.map((movie) => {
+        {data.map((film) => {
+          const name = "title" in film ? film.title : film.name;
           return (
-            <SwiperSlide key={movie.id}>
-              <PreviewModel img={movie.img} title={movie.title} />
-            </SwiperSlide>
-          );
-        })}
-      </Swiper>
-            <Swiper
-        spaceBetween={20}
-        freeMode={true}
-        loop={true}
-        autoplay={{
-          delay: 3000, // 3 giây auto
-          disableOnInteraction: false, // vẫn chạy khi user tương tác
-        }}
-        modules={[Navigation, Pagination, FreeMode, Autoplay]}
-        navigation={true}
-        breakpoints={{
-          320: { slidesPerView: 2 },
-          768: { slidesPerView: 4 },
-          1024: { slidesPerView: 6 },
-        }}
-      >
-        {Movies.map((movie) => {
-          return (
-            <SwiperSlide key={movie.id}>
-              <PreviewModel img={movie.img} title={movie.title} />
+            <SwiperSlide key={film.id}>
+              <PreviewModel img={film.poster_path} title={name} />
             </SwiperSlide>
           );
         })}

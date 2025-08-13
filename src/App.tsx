@@ -1,6 +1,6 @@
 import AppLayout from "./layouts/AppLayout";
 import "./App.css";
-import ListSilde from "./components/ListSlide/ListSilde";
+import Home from "./pages/Home/Home";
 import { BrowserRouter as Router, Routes, Route } from "react-router";
 function App() {
 
@@ -9,7 +9,7 @@ function App() {
       <Router>
         <Routes>
           <Route element={<AppLayout />}>
-            <Route path="/" element={<ListSilde title={"trending movies"} />} />
+            <Route path="/" element={<Home />} />
           </Route>
         </Routes>
       </Router>

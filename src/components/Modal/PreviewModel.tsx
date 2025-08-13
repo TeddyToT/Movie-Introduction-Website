@@ -1,9 +1,21 @@
-const PreviewModel = ({ img, title }) => {
+import { useState } from "react";
+
+interface PreviewModelProps {
+  img: string | null;
+  title: string;
+}
+
+const PreviewModel = ({ img, title }: PreviewModelProps) => {
+  const [isHovered, setIsHovered] = useState(false);
   return (
-    <div className="w-full cursor-pointer hover:text-red-500">
-      <div className="group relative w-full h-[40vh]">
+    <div
+      className="w-full cursor-pointer"
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+    >
+      <div className="group relative w-full h-[40vh] ">
         <img
-          src={img}
+          src={`http://image.tmdb.org/t/p/original/${img}`}
           className="group-hover:brightness-[25%] rounded-3xl w-full h-full object-cover transition-all duration-300"
         />
         <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
@@ -24,7 +36,11 @@ const PreviewModel = ({ img, title }) => {
         </div>
       </div>
       <div className="mt-2 text-left">
-        <p className=" text-white font-semibold text-sm md:text-lg lg:text-base break-words text-justify">
+        <p
+          className={`font-semibold text-sm hover:text-red-500 md:text-lg lg:text-base break-words transition-colors duration-300 ${
+            isHovered ? "text-red-500" : "text-white"
+          }`}
+        >
           {title}
         </p>
       </div>
