@@ -28,7 +28,7 @@ const BannerSilder = () => {
         className="relative mb-10"
       >
         {data?.results.slice(1, 5).map((value) => (
-          <SwiperSlide key={value.id} style={{ width: "100%" }}>
+          <SwiperSlide key={value.id}>
             <Banner data={value} />
           </SwiperSlide>
         ))}

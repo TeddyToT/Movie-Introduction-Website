@@ -17,7 +17,7 @@ const AppHeader: React.FC = () => {
     ${
       isScrolled
         ? "md:bg-black bg-black"
-        : "md:bg-transparent bg-black text-white"
+        : "md:bg-transparent bg-black text-white py-5 duration-200"
     }
   `}
     >

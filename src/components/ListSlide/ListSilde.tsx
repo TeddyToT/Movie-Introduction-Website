@@ -8,13 +8,14 @@ import WhiteButton from "../Button/WhiteButton";
 
 import type { Movie } from "../../types/movie";
 import type { TvSeries } from "../../types/tvSeries";
-
-interface ListSildeProps{
-  data: (Movie | TvSeries)[],
-  title: string
-
+import { Link } from "react-router";
+interface ListSildeProps {
+  data: (Movie | TvSeries)[] | undefined;
+  title: string;
 }
-export default function ListSilde({ data, title }:ListSildeProps) {
+
+export default function ListSilde({ data, title }: ListSildeProps) {
+
   return (
     <div className="w-full">
       <div className="flex items-center justify-between">
@@ -22,10 +23,10 @@ export default function ListSilde({ data, title }:ListSildeProps) {
           {title}
         </p>
         <div className="w-1/4 md:w-1/6 lg:w-[14%] xl:w-[10%]">
-        <WhiteButton text={"View more"} />
+          <WhiteButton text={"View more"} />
         </div>
       </div>
-        <Swiper
+      <Swiper
         spaceBetween={20}
         loop={true}
         autoplay={{
@@ -39,16 +40,18 @@ export default function ListSilde({ data, title }:ListSildeProps) {
           1024: { slidesPerView: 6 },
         }}
       >
-        {data.map((film) => {
+        {data?.map((film) => {
           const name = "title" in film ? film.title : film.name;
+          const url = "title" in film ? `/movie/${film.id}` : `/tv/${film.id}`;
           return (
             <SwiperSlide key={film.id}>
-              <PreviewModel img={film.poster_path} title={name} />
+              <Link to={url} title={url}>
+                <PreviewModel img={film.poster_path} title={name} />
+              </Link>
             </SwiperSlide>
           );
         })}
       </Swiper>
-
     </div>
   );
 }

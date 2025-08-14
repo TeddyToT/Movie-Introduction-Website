@@ -22,9 +22,9 @@ const { data: popularMovies, isLoading: popularMoviesLoading, error: popularMovi
   }
 
   return (
-    <div>
-      <BannerSilder />
-      <div className="w-11/12 mx-auto flex flex-col gap-14">
+    <div className="">
+        <BannerSilder />
+      <div className=" w-11/12 mx-auto flex flex-col gap-14">
        {/* Movies */}
         <ListSilde data={popularMovies?.results} title="Trending Movies" />
         <ListSilde data={topRatedMovies?.results} title="Top Rated Movies" />

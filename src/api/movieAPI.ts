@@ -1,7 +1,7 @@
 import axios from "axios";
 import type { MovieListResponse, MovieDetail } from "../types/movie";
-
-
+import type { Credits } from "../types/credit";
+import type { Videos } from "../types/video";
 const BASE_URL = "https://api.themoviedb.org/3";
 const API_KEY = import.meta.env.VITE_TMDB_API_KEY;
 
@@ -36,7 +36,22 @@ export const fetchTopRatedMovies = async (page = 1): Promise<MovieListResponse> 
   return res.data;
 };
 
-export const fetchMovieDetail = async (id: number): Promise<MovieDetail> => {
+export const fetchMovieDetail = async (id: string): Promise<MovieDetail> => {
   const res = await api.get(`/movie/${id}`);
+  return res.data;
+};
+
+export const fetchSimilarMovies = async (id: string, page = 1): Promise<MovieListResponse> => {
+  const res = await api.get(`/movie/${id}/similar`, { params: { page } });
+  return res.data;
+};
+
+export const fetchMovieCredits = async (id: string): Promise<Credits> => {
+  const res = await api.get(`/movie/${id}/credits`);
+  return res.data;
+};
+
+export const fetchMovieVideos= async (id: string): Promise<Videos> => {
+  const res = await api.get(`/movie/${id}/videos`);
   return res.data;
 };

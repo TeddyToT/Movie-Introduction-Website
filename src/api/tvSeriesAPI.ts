@@ -1,6 +1,7 @@
 import axios from "axios";
 import type {TvSeriesListResponse, TvSeriesDetail } from "../types/tvSeries";
-
+import type { Credits } from "../types/credit";
+import type { Videos } from "../types/video";
 
 const BASE_URL = "https://api.themoviedb.org/3";
 const API_KEY = import.meta.env.VITE_TMDB_API_KEY;
@@ -40,3 +41,19 @@ export const fetchTvSeriesDetail = async (id: number): Promise<TvSeriesDetail> =
   const res = await api.get(`/tv/${id}`);
   return res.data;
 };
+
+export const fetchSimilarTvs = async (id: string, page = 1): Promise<TvSeriesListResponse> => {
+  const res = await api.get(`/tv/${id}/similar`, { params: { page } });
+  return res.data;
+};
+
+export const fetchTvCredits = async (id: string): Promise<Credits> => {
+  const res = await api.get(`/tv/${id}/credits`);
+  return res.data;
+};
+
+export const fetchTvVideos= async (id: string): Promise<Videos> => {
+  const res = await api.get(`/tv/${id}/videos`);
+  return res.data;
+};
+
