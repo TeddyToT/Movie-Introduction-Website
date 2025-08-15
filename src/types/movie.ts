@@ -33,7 +33,7 @@ export interface Movie {
   adult: boolean;
   backdrop_path: string | null;
   genre_ids?: number[]; // only in list API
-  id: number;
+  id: number | string;
   original_language: string;
   original_title: string;
   overview: string;

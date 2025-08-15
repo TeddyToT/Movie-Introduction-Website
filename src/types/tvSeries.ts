@@ -26,7 +26,7 @@ export interface TvSeries {
   adult: boolean;
   backdrop_path: string | null;
   genre_ids?: number[]; // only in list API
-  id: number;
+  id: number | string;
   origin_country: string[];
   original_language: string;
   original_name: string;

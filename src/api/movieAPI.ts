@@ -21,17 +21,16 @@ const api = axios.create({
 //   },
 // });
 
-export const fetchPopularMovies = async (page = 1): Promise<MovieListResponse> => {
+export const fetchPopularMovies = async (
+  page = 1
+): Promise<MovieListResponse> => {
   const res = await api.get("/movie/popular", { params: { page } });
   return res.data;
 };
 
-export const fetchNowPlayingMovies = async (page = 1): Promise<MovieListResponse> => {
-  const res = await api.get("/movie/now_playing", { params: { page } });
-  return res.data;
-};
-
-export const fetchTopRatedMovies = async (page = 1): Promise<MovieListResponse> => {
+export const fetchTopRatedMovies = async (
+  page = 1
+): Promise<MovieListResponse> => {
   const res = await api.get("/movie/top_rated", { params: { page } });
   return res.data;
 };
@@ -41,7 +40,10 @@ export const fetchMovieDetail = async (id: string): Promise<MovieDetail> => {
   return res.data;
 };
 
-export const fetchSimilarMovies = async (id: string, page = 1): Promise<MovieListResponse> => {
+export const fetchSimilarMovies = async (
+  id: string,
+  page = 1
+): Promise<MovieListResponse> => {
   const res = await api.get(`/movie/${id}/similar`, { params: { page } });
   return res.data;
 };
@@ -51,7 +53,20 @@ export const fetchMovieCredits = async (id: string): Promise<Credits> => {
   return res.data;
 };
 
-export const fetchMovieVideos= async (id: string): Promise<Videos> => {
+export const fetchMovieVideos = async (id: string): Promise<Videos> => {
   const res = await api.get(`/movie/${id}/videos`);
+  return res.data;
+};
+
+export const fetchSearchMovies = async ({
+  pageParam = 1,
+  query,
+}: {
+  pageParam?: number;
+  query: string;
+}): Promise<MovieListResponse> => {
+  const res = await api.get("/search/movie", {
+    params: { query, page: pageParam },
+  });
   return res.data;
 };

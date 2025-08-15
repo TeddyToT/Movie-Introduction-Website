@@ -27,17 +27,12 @@ export const fetchPopularTvSeries = async (page = 1): Promise<TvSeriesListRespon
   return res.data;
 };
 
-export const fetchNowPlayingTvSeries = async (page = 1): Promise<TvSeriesListResponse> => {
-  const res = await api.get("/tv/now_playing", { params: { page } });
-  return res.data;
-};
-
 export const fetchTopRatedTvSeries = async (page = 1): Promise<TvSeriesListResponse> => {
   const res = await api.get("/tv/top_rated", { params: { page } });
   return res.data;
 };
 
-export const fetchTvSeriesDetail = async (id: number): Promise<TvSeriesDetail> => {
+export const fetchTvSeriesDetail = async (id: string): Promise<TvSeriesDetail> => {
   const res = await api.get(`/tv/${id}`);
   return res.data;
 };
@@ -54,6 +49,19 @@ export const fetchTvCredits = async (id: string): Promise<Credits> => {
 
 export const fetchTvVideos= async (id: string): Promise<Videos> => {
   const res = await api.get(`/tv/${id}/videos`);
+  return res.data;
+};
+
+export const fetchSearchTvs = async ({
+  pageParam = 1,
+  query,
+}: {
+  pageParam?: number;
+  query: string;
+}): Promise<TvSeriesListResponse> => {
+  const res = await api.get("/search/tv", {
+    params: { query, page: pageParam },
+  });
   return res.data;
 };
 

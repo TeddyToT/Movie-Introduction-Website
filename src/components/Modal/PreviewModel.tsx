@@ -1,14 +1,18 @@
 import { useState } from "react";
-
+import { Link } from "react-router";
 interface PreviewModelProps {
+  id: string|number;
   img: string | null;
   title: string;
+  type: string;
 }
 
-const PreviewModel = ({ img, title }: PreviewModelProps) => {
+const PreviewModel = ({ id,img, title,type }: PreviewModelProps) => {
   const [isHovered, setIsHovered] = useState(false);
+  const url = (type === "movie") ? `/movie/${id}` : `/tv/${id}`;
   return (
-    <div
+    <Link to={url}>
+        <div
       className="w-full cursor-pointer"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
@@ -45,6 +49,8 @@ const PreviewModel = ({ img, title }: PreviewModelProps) => {
         </p>
       </div>
     </div>
+    </Link>
+
   );
 };
 export default PreviewModel;
