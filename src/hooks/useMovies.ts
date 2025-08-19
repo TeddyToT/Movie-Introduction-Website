@@ -51,7 +51,7 @@ export const useMovieCredits = (id?: string) => {
   });
 };
 
-export const useMovieVideos = (id?: string) => {
+export const useMovieVideos = (id?: string | number) => {
   return useQuery({
     queryKey: ["movieVideos", id],
     queryFn: () => fetchMovieVideos(id!),

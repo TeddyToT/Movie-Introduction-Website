@@ -12,7 +12,9 @@ const api = axios.create({
     language: "en-US",
   },
 });
+
 //for ACCESS TOKEN usage
+
 // const api = axios.create({
 //   baseURL: "https://api.themoviedb.org/3",
 //   headers: {
@@ -53,7 +55,7 @@ export const fetchMovieCredits = async (id: string): Promise<Credits> => {
   return res.data;
 };
 
-export const fetchMovieVideos = async (id: string): Promise<Videos> => {
+export const fetchMovieVideos = async (id: string | number): Promise<Videos> => {
   const res = await api.get(`/movie/${id}/videos`);
   return res.data;
 };

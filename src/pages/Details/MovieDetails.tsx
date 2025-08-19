@@ -58,7 +58,7 @@ const MovieDetails = () => {
     <div className="text-white flex flex-col mb-10">
       <div className="w-screen md:min-h-[100vh]">
         <HalfThumbnail img={movieDetails?.backdrop_path} />
-        <FilmInfo filmCredits={movieCredits} filmDetails={movieDetails}/>
+        <FilmInfo filmCredits={movieCredits} filmDetails={movieDetails} />
       </div>
       <div className="flex flex-col w-11/12 mx-auto gap-12 pb-20">
         {movieVideos?.results.slice(0, 5).map((movie) => (
@@ -66,7 +66,9 @@ const MovieDetails = () => {
         ))}
       </div>
       <div className="w-11/12 mx-auto">
-        <ListSilde data={similarMovies?.results} title="Similar"/>
+        {similarMovies?.results.length !== 0 && (
+          <ListSilde data={similarMovies?.results} title="Similar" />
+        )}
       </div>
     </div>
   );

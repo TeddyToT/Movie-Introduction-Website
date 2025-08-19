@@ -1,21 +1,10 @@
 import BannerSilder from "../../components/BannerSlider/BannerSlider";
 import ListSilde from "../../components/ListSlide/ListSilde";
-import MainTrailerModel from "../../components/Modal/MainTrailerModel";
 import { usePopularMovies, useTopRatedMovies } from "../../hooks/useMovies";
 import { usePopularTVs, useTopRatedTVs } from "../../hooks/useTVs";
-import { useState } from "react";
+
 const Home = () => {
-  const [showTrailer, setShowTrailer] = useState(false)
-  const handleShowTrailerClick = () =>{
-    setShowTrailer(true)
-    console.log("Home: ", showTrailer);
 
-  }
-
-    const handleCLoseClick = () => {
-    setShowTrailer(false)
-    console.log("main: ", showTrailer);
-  };
   const {
     data: popularMovies,
     isLoading: popularMoviesLoading,
@@ -46,6 +35,9 @@ const Home = () => {
   ) {
     return <p className="text-white">Loading...</p>;
   }
+  if (popularMoviesLoading) {
+    return <p className="text-white">Loading popular movies...</p>;
+  }
 
   if (
     popularMoviesError ||
@@ -58,8 +50,7 @@ const Home = () => {
 
   return (
     <div className="mb-20">
-      <MainTrailerModel showState={showTrailer} handleCLoseClick={handleCLoseClick}/>
-      <BannerSilder handleShowTrailerClick={handleShowTrailerClick}/>
+      <BannerSilder />
       <div className=" w-11/12 mx-auto flex flex-col gap-14">
         {/* Movies */}
         <ListSilde data={popularMovies?.results} title="Trending Movies" />

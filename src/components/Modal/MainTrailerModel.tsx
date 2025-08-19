@@ -1,23 +1,41 @@
-interface MainTrailerModelProps{
-    showState: boolean
-    handleCLoseClick: ()=>void
+import { useMovieVideos } from "../../hooks/useMovies";
+
+interface MainTrailerModelProps {
+  movieId: string | number | undefined;
+  showTrailer: boolean;
+  closeTrailer: () => void;
 }
-const MainTrailerModel = ({showState, handleCLoseClick}:MainTrailerModelProps) => {
+const MainTrailerModel = ({
+  movieId,
+  showTrailer,
+  closeTrailer,
+}: MainTrailerModelProps) => {
+  const { data: movieVideos } = useMovieVideos(movieId);
+
+  const handleCLoseClick = () => {
+    closeTrailer();
+  };
 
   return (
-    <div className={`fixed top-0 bottom-0 left-0 right-0 bg-black/50 py-20 md:py-40 lg:py-20 z-9999 ${showState?"":" hidden"}`}>
+    <div
+      className={`fixed top-0 bottom-0 left-0 right-0 bg-black/50 py-20 md:py-40 lg:py-20 z-9000 ${
+        showTrailer ? "" : " hidden"
+      }`}
+    >
       <div className="relative max-w-screen-md bg-black-main h-full z-50 mx-auto p-8 bg-black">
-        <iframe
-          src="https://www.youtube.com/embed/NJ0fzQzKOfg"
-          className="w-full h-full"
-        ></iframe>
+        {showTrailer && (
+          <iframe
+            src={`https://www.youtube.com/embed/${movieVideos?.results[0].key}`}
+            className="w-full h-full"
+          ></iframe>
+        )}
         <svg
           onClick={() => handleCLoseClick()}
           stroke="currentColor"
           fill="currentColor"
           strokeWidth="0"
           viewBox="0 0 512 512"
-          className="absolute top-2 right-2 text-xl text-white cursor-pointer hover:text-red-500"
+          className="absolute top-2 right-2 text-xl text-white cursor-pointer hover:text-red-500 "
           height="1em"
           width="1em"
           xmlns="http://www.w3.org/2000/svg"

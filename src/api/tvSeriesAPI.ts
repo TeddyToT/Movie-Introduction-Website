@@ -13,7 +13,9 @@ const api = axios.create({
     language: "en-US",
   },
 });
+
 //for ACCESS TOKEN usage
+
 // const api = axios.create({
 //   baseURL: "https://api.themoviedb.org/3",
 //   headers: {

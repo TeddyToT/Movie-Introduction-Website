@@ -1,7 +1,7 @@
 import PreviewModel from "../../components/Modal/PreviewModel";
 import WhiteButton from "../../components/Button/WhiteButton";
-import type { Movie,MovieListResponse } from "../../types/movie";
-import type { TvSeries,TvSeriesListResponse } from "../../types/tvSeries";
+import type { Movie, MovieListResponse } from "../../types/movie";
+import type { TvSeries, TvSeriesListResponse } from "../../types/tvSeries";
 
 interface MediaGridProps {
   pages: (MovieListResponse | TvSeriesListResponse)[] | undefined;
@@ -20,15 +20,23 @@ export default function MediaGrid({
 }: MediaGridProps) {
   return (
     <>
-      <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4">
+      <div
+        className={`grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4 ${
+          hasNextPage ? "" : "mb-28"
+        }`}
+      >
         {pages?.map((page) =>
-          page.results.map((item: Movie|TvSeries) => (
+          page.results.map((item: Movie | TvSeries) => (
             <PreviewModel
               key={item.id}
               id={item.id}
               type={mediaType}
               img={item.poster_path}
-              title={mediaType === "movie" ? item.title : item.name}
+              title={
+                mediaType === "movie"
+                  ? (item as Movie).title
+                  : (item as TvSeries).name
+              }
             />
           ))
         )}
